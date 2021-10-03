@@ -36,3 +36,19 @@ cadastrados com todos os campos;
 5 - Escreva um algoritmo que avalia se uma frase contém todas as letras do alfabeto
 brasileiro (Pangrama - https://pt.wikipedia.org/wiki/Pangrama).
 Exemplo: A Gazeta publica hoje breve nota de faxina na quermesse.
+
+6 - O que o seguinte algoritmo faz?
+const descubra_o_que_eu_faco = (parameter01, parameter02) => {
+let var01 = {};
+let var02 = 0;
+[...parameter02].filter((p) => /[A-Za-z]/.test(p))
+.map((c) => c.toLowerCase())
+.forEach(
+(p) => {
+if (!(p in var01)) {
+var02 += 1;
+var01[p] = true;
+}
+});
+return var02 == parameter01;
+};

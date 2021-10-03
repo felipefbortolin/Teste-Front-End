@@ -8,6 +8,12 @@ $( document ).ready(function() {
     }else{
         $(".div-table").html("<p>Não possui clientes cadastrados.<p>");
     }   
+    /*localStorage.setItem(0,  JSON.stringify({"id":1,"nome":"Teste","email":"teste@teste.com","nascimento":"2021-10-03","sexo":"Masculino"}));
+    localStorage.setItem(1,  JSON.stringify({"id":3,"nome":"Bob","email":"bob@gmail.com","nascimento":"2021-10-03","sexo":"Masculino"}));
+    localStorage.setItem(2,  JSON.stringify({"id":5,"nome":"Jenny","email":"jenny@gmail.com","nascimento":"2021-10-03","sexo":"Feminino"}));
+    localStorage.setItem(3,  JSON.stringify({"id":2,"nome":"Ana","email":"ana@gmail.com","nascimento":"2021-10-03","sexo":"Feminino"}));
+    localStorage.setItem(4,  JSON.stringify({"id":4,"nome":"Lian","email":"lian@gmail.com","nascimento":"2021-10-03","sexo":"Masculino"}));
+    */
 });
 
 $(".pulse").click( function (){
@@ -16,17 +22,16 @@ $(".pulse").click( function (){
 });
 
 $("#form").submit(function (event){
-	
     var form = {
-        "id" : localStorage.length,
+        "id" : getLastIdFromLocalStorage(),
         "nome" : $("#nome").val(),
         "email" : $("#email").val(),
         "nascimento" : $("#nascimento").val(),
         "sexo" : $("#sexo").val()
     };
     try{
-        saveLocalStoregeItens(form);
 
+        saveLocalStoregeItens(form);
         event.preventDefault();
 
         $.when(ajax1(form), ajax2(form), ajax3(form))
@@ -51,35 +56,72 @@ function formClear(){
 }
 
 function getLocalStoregeItens(){
-    for (var i = 0; i<localStorage.length; i++) {  
+    for (let i = 0; i<localStorage.length; i++) {  
         console.log(localStorage.key(i) +" - "+localStorage.getItem(localStorage.key(i)));
+        
     }
 }
 
 function saveLocalStoregeItens(form){
     validateItem(form);
-    var output = [];  
-    for (i in localStorage){
-        obj = JSON.parse(localStorage.getItem(i));
-        if (obj != null) {
-            output.push(obj);
+    if(localStorage.length > 0){
+        let output = [];  
+        for (let i = 0; i<localStorage.length; i++) {  
+            if(localStorage.getItem(localStorage.key(i)) != null){
+                let obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+                output.push(obj);
+            }
         }
-    }
-    output.push(form);
-    output.sort();
-    for (i = 0; i < output.length; i++) {
-        localStorage.setItem(i,  JSON.stringify(output[i]));  
+        output.push(form);
+        output.sort();
+        localStorage.clear();
+        for (let i = 0; i < output.length; i++) {
+            localStorage.setItem(i,  JSON.stringify(output[i]));  
+        }  
+    }else{
+        localStorage.setItem(0,  JSON.stringify(form));
     }
 }
 
-function validateItem(form){
-    for (var i = 0; i<localStorage.length; i++) {  
-        obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        if(form.nome == obj.nome){
-            throw new UserException("Nome já cadastrado");
+function getLastIdFromLocalStorage(){
+    let lastId = 0;
+    if(localStorage.length > 0){
+        for (let i = 0; i<localStorage.length; i++) {  
+            if(localStorage.getItem(localStorage.key(i)) != null){
+                let id = JSON.parse(localStorage.getItem(localStorage.key(i))).id ;
+                if(id >= lastId){
+                    lastId = id + 1;
+                }
+            }
         }
-        if(form.email == obj.email){
-            throw new UserException("Email já cadastrado");
+    }else{
+        lastId = 1;
+    }
+    return lastId;
+}
+
+function validateItem(form){
+    if (form.nome == null || form.nome ==""){
+        throw new UserException("Nome não foi informado.");
+    }
+    if (form.email == null || form.email ==""){
+        throw new UserException("Email não foi informado.");
+    }
+    if (form.nascimento == null || form.nascimento ==""){
+        throw new UserException("Nascimento não foi informado.");
+    }
+    if (form.sexo == null || form.sexo ==""){
+        throw new UserException("Sexo não foi informado.");
+    }
+    for (let i = 0; i < localStorage.length; i++) {  
+        if(localStorage.getItem(localStorage.key(i)) != null){
+            let obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+            if(form.nome == obj.nome){
+                throw new UserException("Nome já cadastrado.");
+            }
+            if(form.email == obj.email){
+                throw new UserException("Email já cadastrado.");
+            }
         }
     }
 }
@@ -90,7 +132,8 @@ function printMessages(){
         +"<p>"+messages[1]+"</p>"
         +"<p>"+messages[2]+"</p>");
     $(".messages").show("slow");
-    setTimeout(() => $(".messages").hide("slow"), 9000);
+    setTimeout(() => $(".messages").hide("slow"), 8000);
+    messages = [];
 }
 
 function ajax1(form){
@@ -118,7 +161,7 @@ function ajax1(form){
         });
 }
 
-function ajax2(nome, email, nascimento, sexo){
+function ajax2(form){
     return $.ajax({
             type: "POST",
     
@@ -143,7 +186,7 @@ function ajax2(nome, email, nascimento, sexo){
         });  
 }
 
-function ajax3(nome, email, nascimento, sexo){
+function ajax3(form){
     return $.ajax({
             type: "POST",
     
@@ -176,21 +219,12 @@ function UserException(message){
 //SCRIPT DA PAGINA LIST
 
 function createTable(){
-    var html = "";
-    var output = [];  
-    for (i in localStorage){
-        obj = JSON.parse(localStorage.getItem(i));
-        if (obj != null) {
-            output.push(obj);
-        }
-    }
-    output.sort();
-    console.log(output.length);
-    console.log(output);
-    for (i = 0; i < output.length; i++) {    
+    let html = "";
+    let output = getOrderLocalStorageList();
+    for (let i = 0; i < output.length; i++) {    
         obj = output[i];
         html += "<tr>"
-        +'<th scope="row">'+ (i + 1) +'</th>'
+        +'<th scope="row">'+ obj.id +'</th>'
         +'<td>'+ obj.nome +'</td>'
         +'<td>'+ obj.email +'</td>'
         +'<td>'+ obj.nascimento +'</td>'
@@ -201,12 +235,59 @@ function createTable(){
     return html;
 }
 
-function deleteClient(value){
-    localStorage.removeItem(value);
-    window.location.reload();
+function deleteClient(id){
+    try{
+        let key = getKeyLocalStoregeItenById(id)
+        validateDeleteClient(key);
+        localStorage.removeItem(key);
+        window.location.reload();
+    }catch(e){
+        alert(e.message);
+    }
+}
+
+function getKeyLocalStoregeItenById(id){
+    for (let i = 0; i<localStorage.length; i++) {  
+        if(localStorage.getItem(localStorage.key(i)) != null){
+            let idStorage = JSON.parse(localStorage.getItem(localStorage.key(i))).id;
+            if(id == idStorage){
+                return parseInt(localStorage.key(i));
+            }
+        }
+    }
 }
 
 function deleteAll(){
-    localStorage.clear();
-    window.location.reload();
+    try{
+        localStorage.clear();
+        window.location.reload();
+    }catch{
+        alert("Erro, não foi possivel deletar todos os clientes.");
+    }
+}
+
+function getOrderLocalStorageList(){
+    let output = [];  
+    for (let i in localStorage){
+        let obj = JSON.parse(localStorage.getItem(i));
+        if (obj != null) {
+            output.push(obj);
+        }
+    }
+    return output.sort((a, b) => {
+        if (a.id > b.id) {
+            return 1;
+          }
+          if (a.id < b.id) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+    });
+}
+
+function validateDeleteClient(key){
+    if (localStorage.getItem(key) == null){
+        throw new UserException("Não foi possivel deletar este cliente.");
+    }
 }

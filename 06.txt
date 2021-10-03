@@ -1,0 +1,13 @@
+6. 
+"descubra_o_que_eu_faco" é uma variável constante, logo, não é possível atribuir um valor mais de uma vez.
+
+"descubra_o_que_eu_faco" está recebendo uma "Arrow Function" com os parâmetros "parameter01" e "parameter02", onde "parameter01" é um numero inteiro e "parameter02" é um "Array de strings". 
+Dentro da função temos duas variáveis criadas do tipo "let", uma variável que só existirá dentro desta função. A primeira "var01" recebe um objeto vazio e a segunda "var02" recebe 0.
+
+O "parameter02" será filtrado e transformado em uma nova "Array" recebendo como parâmetro o item "p", que será testado se encaixa no padrão de A a Z, incluindo letras maiúsculas e minúsculas, e retornará como verdadeiro ou falso.
+
+Após a função "filter", o novo Array será percorrido pela função "map", onde cada item "c" terá todas as letras convertidas para minúsculo, por exemplo: ("Script" para "script").
+
+Após a função "map", o "Array" será percorrido novamente pela função "forEach", mas dessa vez será executada uma função para cada item percorrido, a qual irá testar se NÃO existe uma propriedade com o nome igual ao item "p" dentro do objeto "var01". Caso seja verdadeiro, a variável "var02" recebe ela mesma mais 1, e o objeto "var01" receberá uma propriedade com o nome igual ao "p" com valor verdadeiro.
+
+No final, "descubra_o_que_eu_faco" retornará se a condição ("var02" é igual ao "parameter01") for verdadeira ou falsa.

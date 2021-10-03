@@ -9,16 +9,20 @@ $(".button").click( function (){
 });
 
 function analise(){
-    var html
+    let html = "";
+    let alfabeto = [];
     if ($("#kwy").is(":checked")) {
-        var alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     }else{
-        var alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "z"];
+        alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "z"];
     }
-    var frase = $("#frase").val().split("");
+
+    let pattern = /[a-zA-Z]/g;
+    let frase = $("#frase").val().match(pattern);
+    frase = frase != null ? frase : []
     if(frase.length > 0){
-        for (i = 0; i < frase.length; i++) {
-            for (j = 0; j < alfabeto.length; j++) {
+        for (let i = 0; i < frase.length; i++) {
+            for (let j = 0; j < alfabeto.length; j++) {
                 if (frase[i].toLowerCase() == alfabeto[j]) {
                     alfabeto.splice(j,1); 
                 }
@@ -27,7 +31,7 @@ function analise(){
         if(alfabeto.length > 1){
             $(".body p").attr("style","color:red;");
             html = "Letras que faltam para a frase se tornar um Pangrama:\n";
-            for (i = 0; i < alfabeto.length; i++) {
+            for (let i = 0; i < alfabeto.length; i++) {
                 if(i != (alfabeto.length -1)){
                     html += alfabeto[i].toUpperCase() + ", "; 
                 }else{

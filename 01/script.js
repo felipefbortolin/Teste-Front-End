@@ -1,27 +1,26 @@
 $( document ).ready(function() {
     getHour();
-    img = Math.floor(Math.random() * 3);
+    let img = Math.floor(Math.random() * 3);
     $('#meal').attr('src','images/'+ img +'.jpg');
 });
 
 function getHour() {
-    var d = new Date();
-    var hours = d.getHours() + 3;
-    var minutes = d.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
+    let d = new Date();
+    let hours = d.getHours() + 3;
+    let minutes = d.getMinutes();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + '<span class="blink_me">:</span>' + minutes + ampm;
+    hours = hours ? hours : 12; 
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + '<span class="blink_me">:</span>' + minutes + ampm;
     $('#hours').html(strTime);
     //loop 
-    i = 0;
-    setTimeout(function() {   
-        i++;                  
-        if (i < 20) {          
+    let i = minutes + 2;
+    setTimeout(function() {                    
+        if (i > minutes) {          
             getHour();             
         }                       
-      }, 30000)
+      }, 1000)
 }
 
 $('.animate-pulse').click( function (){
