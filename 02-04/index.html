@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="cs.css">
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> 
+        <meta charset="UTF-8">
+        <title>Cadasto</title>
+    </head>
+    <body class="body">
+        <div class="header">
+                <a class="logo" href="index.html">Programa de clientes</a>
+                
+                <a class="pages" href="index.html">Cadastro de clientes</a>
+                
+                <a class="pages" href="list.html">Lista de clientes</a>
+        </div>
+        <h2>Cadastro de cliente</h2>
+        <div class="form">
+            <form id="form" method="post">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input required type="text" class="form-control  input" id="nome" placeholder="Nome e sobrenome">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input required type="email" class="form-control input" id="email" placeholder="exemplo@exemplo.com">
+                </div>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label for="nascimento">Nascimento</label>
+                        <input required type="date" class="form-control  input" id="nascimento" >
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="sexo">Sexo</label>
+                        <select id="sexo" class="form-control  input" required>
+                          <option value="" selected disabled>Escolha...</option>
+                          <option value="Feminino">Feminino</option>
+                          <option value="Masculino">Masculino</option>
+                        </select>
+                      </div>
+                </div>
+                <button type="submit" class="button pulse">Salvar</button>
+                <div class="messages">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+<script src="script.js"></script>

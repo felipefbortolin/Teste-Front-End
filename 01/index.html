@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="cs.css">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <meta charset="UTF-8">
+        <title>Atividade 01</title>
+    </head>
+    <body>
+        <div class="header">
+            <div>
+                <div id="logo">
+                <p>FitMeals</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="div-1">
+            
+                <p class="text-hour">Your next meal is at</p>
+                <br/>
+                <p id="hours" class="hour"></p>
+                <img id="meal" class="image animate-pulse" >
+                <p class="text-image">Meal Suggestions</p>
+        </div>
+        <div class="div-2 btns">
+            <div class="horizontal-bar"></div>
+            <a id="btn1" class="button animate-pulse">Did you know?</a>
+            <br/>
+            <div class="wrapper">
+                <div class="item-grid-1 btns">
+                    <a id="btn2" class="button animate-pulse">I'm Hungry</a>
+                </div>
+                <div class="item-grid-2 btns">
+                    <a id="btn3" class="button animate-pulse">Just Ate</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="centered-element">
+                <i onclick="color('1')" class="bi bi-list animate-pulse"></i>
+                <i onclick="color('2')" class="bi bi-triangle animate-pulse"></i>
+                <i onclick="color('3')" class="bi bi-circle animate-pulse"></i>
+                <i onclick="color('4')" class="bi bi-square animate-pulse"></i>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="script.js"></script>

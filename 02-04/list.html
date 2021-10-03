@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="cs.css">
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> 
+      
+        <meta charset="UTF-8">
+        <title>List</title>
+    </head>
+    <body class="body">
+        <div class="header">
+                <a class="logo" href="index.html">Programa de clientes</a>
+                
+                <a class="pages" href="index.html">Cadastro de clientes</a>
+                
+                <a class="pages" href="list.html">Lista de clientes</a>
+        </div>
+        <div class="div-table">
+        <table id="table" class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Data de nascimento</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Deletar</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+          <button onclick="deleteAll();" class="button-delete pulse">Deletar todos</button>
+          </div>
+    </body>
+</html>
+<script src="script.js"></script>
