@@ -1,26 +1,43 @@
 $( document ).ready(function() {
     getHour();
-    let img = Math.floor(Math.random() * 3);
-    $('#meal').attr('src','images/'+ img +'.jpg');
+    setTimeout(function() {                     
+        setTimeout(() => $('.initial').animate({
+            height: 0,
+            "padding-top": 0,
+          }, 1000, function(){
+            $('.initial').hide();
+          }));
+    }, 3000)
 });
 
 function getHour() {
     let d = new Date();
-    let hours = d.getHours() + 3;
-    let minutes = d.getMinutes();
-    let ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; 
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    let strTime = hours + '<span class="blink_me">:</span>' + minutes + ampm;
+    let hours = d.getHours();
+    let ampm;
+    if((hours >= 0 && hours < 6)||(hours >= 19 && hours <= 24)){
+        hours = '6';
+        ampm = 'AM';
+        $('#meal').attr('src','images/3.jpg');
+    }else if(hours >= 6 && hours < 9){
+        hours = '9';
+        ampm = 'AM';
+        $('#meal').attr('src','images/4.jpg');
+    }else if(hours >= 9 && hours < 12){
+        hours = '12';
+        ampm = 'PM';
+        $('#meal').attr('src','images/1.jpg');
+    }else if(hours >= 12 && hours < 15){
+        hours = '03';
+        ampm = 'PM';
+        $('#meal').attr('src','images/5.jpg');
+    }else if(hours >= 15 && hours < 19){
+        hours = '19';
+        ampm = 'PM';
+        $('#meal').attr('src','images/2.jpg');
+    }
+    let strTime = hours + '<span class="blink_me">:</span>' + "00" + ampm;
     $('#hours').html(strTime);
-    //loop 
-    let i = minutes + 2;
-    setTimeout(function() {                    
-        if (i > minutes) {          
-            getHour();             
-        }                       
-      }, 1000)
+    
 }
 
 $('.animate-pulse').click( function (){
