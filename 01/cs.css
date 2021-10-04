@@ -200,8 +200,7 @@ p {
 }
 
 @keyframes start {
-    20% {
-        
+    20% {  
         -webkit-transform: rotate(360deg); 
         transform:rotate(360deg);
     }

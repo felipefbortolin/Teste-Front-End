@@ -1,6 +1,5 @@
 var messages = [];
 $( document ).ready(function() {
-    //localStorage.clear();
     getLocalStoregeItens();
    $("#nascimento").attr("max", $.datepicker.formatDate('yy-mm-dd', new Date()));
    if(localStorage.length != 0){
@@ -8,12 +7,6 @@ $( document ).ready(function() {
     }else{
         $(".div-table").html("<p>Não possui clientes cadastrados.<p>");
     }   
-    /*localStorage.setItem(0,  JSON.stringify({"id":1,"nome":"Teste","email":"teste@teste.com","nascimento":"2021-10-03","sexo":"Masculino"}));
-    localStorage.setItem(1,  JSON.stringify({"id":3,"nome":"Bob","email":"bob@gmail.com","nascimento":"2021-10-03","sexo":"Masculino"}));
-    localStorage.setItem(2,  JSON.stringify({"id":5,"nome":"Jenny","email":"jenny@gmail.com","nascimento":"2021-10-03","sexo":"Feminino"}));
-    localStorage.setItem(3,  JSON.stringify({"id":2,"nome":"Ana","email":"ana@gmail.com","nascimento":"2021-10-03","sexo":"Feminino"}));
-    localStorage.setItem(4,  JSON.stringify({"id":4,"nome":"Lian","email":"lian@gmail.com","nascimento":"2021-10-03","sexo":"Masculino"}));
-    */
 });
 
 $(".pulse").click( function (){
@@ -46,8 +39,7 @@ $("#form").submit(function (event){
             formClear();
         });
     }catch(e){
-        alert(e.message);
-        
+        alert(e.message);   
     }
 });
 

@@ -1,7 +1,4 @@
 
-$( document ).ready(function() {
-
-});
 $(".button").click( function (){
     this.style.animation = "";
     setTimeout(() => this.style.animation = "pulse 0.2s linear", 1);
@@ -40,7 +37,7 @@ function analise(){
             }
         }else if(alfabeto.length == 1){
             $(".body p").attr("style","color:blue;");
-            html = 'Falta somente a letra "'+ alfabeto[0].toUpperCase() +'" para a frase se tornar um Pangrama:'
+            html = 'Falta somente a letra "'+ alfabeto[0].toUpperCase() +'" para a frase se tornar um Pangrama.'
         }else{
             $(".body p").attr("style","color:green;");
             html = "Esta frase é um Pangrama.";
